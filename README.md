@@ -1,3 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/bpp90v9fgwsc1nof?svg=true)](https://ci.appveyor.com/project/mishrsud/smi-microsoft-netcore-extensions)
+
+
 # Smi.Microsoft.NetCore.Extensions
 A collection of useful extensions for .NET Core applications
 
