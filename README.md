@@ -15,6 +15,7 @@ public class Program
                     args, 
                     "MYAPP_",
                     nameof(Sample.ConsoleApp))
+                .UseStartup<Startup>(args)
                 .RunConsoleAsync();
         }
     }
