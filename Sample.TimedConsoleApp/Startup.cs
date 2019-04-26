@@ -1,8 +1,9 @@
-using Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sample.ConsoleApp;
+using Sample.TimedConsoleApp;
+using Sample.TimedConsoleApp.Services;
+using Smi.NetCore.Extensions.Hosting;
 
 namespace Sample.Console
 {
@@ -17,8 +18,11 @@ namespace Sample.Console
             HostBuilderContext hostBuilderContext, 
             IServiceCollection services)
         {
-            
+            Configuration = hostBuilderContext.Configuration;
+            services.AddScoped<IOutputWriter, ConsoleOutputWriter>();
         }
+
+        public IConfiguration Configuration { get; private set; }
 
         /// <summary>
         /// Additional configuration
@@ -31,7 +35,7 @@ namespace Sample.Console
             IConfigurationBuilder configurationBuilder,
             string[] commandLineArgs)
         {
-                
+            // Additional configuration     
         }
     }
 }
