@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 
-namespace Hosting
+namespace Smi.NetCore.Extensions.Hosting
 {
     /// <summary> A base class to provide correct handling of cancellation and start/stop semantics. </summary>
     /// <remarks>
