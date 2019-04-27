@@ -21,10 +21,8 @@ build_script:
   - cmd: dotnet build
 after_build:
   # For once the build has completed
-  - cmd: nbgv install
-  - cmd: git commit -m "Creating nuget"
-  - cmd: nbgv prepare-release --nextVersion 1.0
-  - cmd: dotnet pack Hosting\Hosting.csproj /p:Version=".\nbgv.exe get-version" -c Release --include-source -o nugets
+  - cmd: for /f "delims=" %a in ('nbgv get-version -v SemVer2') do @set Version=%a
+  - cmd: dotnet pack Hosting\Hosting.csproj /p:Version=%Version% -c Release --include-source -o nugets
 clone_depth: 1
 on_finish :
   # any cleanup in here
