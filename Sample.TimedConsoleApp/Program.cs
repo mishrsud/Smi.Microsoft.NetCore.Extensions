@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
-using Sample.Console;
 using Smi.NetCore.Extensions.Hosting;
 
 namespace Sample.TimedConsoleApp
