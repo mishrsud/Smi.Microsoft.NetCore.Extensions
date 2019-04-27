@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Hosting;
 using Microsoft.Extensions.Hosting;
+using Smi.NetCore.Extensions.Hosting;
 
-namespace Sample.ConsoleApp
+namespace Sample.TimedConsoleApp
 {
     public class Program
     {
@@ -12,7 +12,8 @@ namespace Sample.ConsoleApp
                 .CreateBuilder<TimedHostedService>(
                     args, 
                     "MYAPP_",
-                    nameof(Sample.ConsoleApp))
+                    nameof(TimedConsoleApp))
+                .UseStartup<Startup>(args)
                 .RunConsoleAsync();
         }
     }
