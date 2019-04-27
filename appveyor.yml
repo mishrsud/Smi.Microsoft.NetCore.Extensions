@@ -6,6 +6,9 @@ branches:
 init:
   # Good practise, because Windows line endings are different from Unix/Linux ones
   - cmd: git config --global core.autocrlf true
+  - cmd: git config --global user.email "mailsudhanshumishra@gmail.com"
+  - cmd: git config --global user.name "Sudhanshu Mishra"
+
 install:
   # Install repo specific stuff here
   - cmd: dotnet tool install -g nbgv
