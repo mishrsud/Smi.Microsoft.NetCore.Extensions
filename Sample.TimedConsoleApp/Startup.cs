@@ -1,11 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sample.TimedConsoleApp;
 using Sample.TimedConsoleApp.Services;
 using Smi.NetCore.Extensions.Hosting;
 
-namespace Sample.Console
+namespace Sample.TimedConsoleApp
 {
     public class Startup : IStartup
     {
