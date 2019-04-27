@@ -1,14 +1,21 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Hosting;
+using Sample.TimedConsoleApp.Services;
+using Smi.NetCore.Extensions.Hosting;
 
-namespace Sample.ConsoleApp
+namespace Sample.TimedConsoleApp
 {
     public class TimedHostedService : HostedServiceBase, IDisposable
     {
+        private readonly IOutputWriter _outputWriter;
         private Timer _workTimer;
         private const int RunIntervalSeconds = 5;
+
+        public TimedHostedService(IOutputWriter outputWriter)
+        {
+            _outputWriter = outputWriter;
+        }
         
         protected override Task ExecuteLongRunningProcessAsync(CancellationToken cancellationToken)
         {
@@ -23,7 +30,7 @@ namespace Sample.ConsoleApp
         
         public void Dispose()
         {
-            System.Console.WriteLine("Disposing");
+            _outputWriter.Write($"{nameof(TimedHostedService)} is being disposed");
             _workTimer?.Change(Timeout.Infinite, 0);
             _workTimer?.Dispose();
         }
@@ -32,12 +39,12 @@ namespace Sample.ConsoleApp
         {
             if (state is CancellationToken cancellationToken && cancellationToken.IsCancellationRequested)
             {
-                System.Console.WriteLine("Cancelled");
+                _outputWriter.Write($"{nameof(TimedHostedService)} has received Cancellation");
                 return;
             }
             
             // Simulate work
-            System.Console.WriteLine("Working");
+            _outputWriter.Write($"{nameof(TimedHostedService)} is working");
         }
 
     }
