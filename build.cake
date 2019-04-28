@@ -101,10 +101,15 @@ Task("PublishAppVeyorArtifacts")
     .Does(() =>
     {
         CopyFiles($"{packagesDir}/*.nupkg", MakeAbsolute(Directory("./")), false);
+        CopyFiles($"{packagesDir}/*.snupkg", MakeAbsolute(Directory("./")), false);
 
         GetFiles($"./*.nupkg")
             .ToList()
             .ForEach(f => AppVeyor.UploadArtifact(f, new AppVeyorUploadArtifactsSettings { DeploymentName = "packages" }));
+            
+        GetFiles($"./*.snupkg")
+                    .ToList()
+                    .ForEach(f => AppVeyor.UploadArtifact(f, new AppVeyorUploadArtifactsSettings { DeploymentName = "packages" }));
     });
 
 Task("Default")
