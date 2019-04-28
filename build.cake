@@ -54,7 +54,7 @@ Task("SetAppVeyorVersion")
     .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
     .Does(() =>
     {
-        AppVeyor.UpdateBuildVersion(packageVersion);
+       // AppVeyor.UpdateBuildVersion(packageVersion);
     });
 
 Task("Build")
