@@ -44,3 +44,5 @@ deploy:
 environment:
   # No need to pre-warm the `NuGet` cache
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+# This script is adapted from Gabriel Weyer's sample: https://github.com/gabrielweyer/cake-build/
