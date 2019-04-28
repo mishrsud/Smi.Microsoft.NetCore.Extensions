@@ -4,6 +4,11 @@
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <AssemblyName>Smi.NetCore.Extensions.Hosting</AssemblyName>
         <RootNamespace>Smi.NetCore.Extensions.Hosting</RootNamespace>
+        <PackageId>Smi.NetCore.Extensions.Hosting</PackageId>
+        <Authors>Sudhanshu Mishra</Authors>
+        <RepositoryUrl>https://github.com/mishrsud/Smi.Microsoft.NetCore.Extensions</RepositoryUrl>
+        <PackageTags>Hosting Host Generic Host</PackageTags>
+        <Description>Extensions on generic IHost to structure console hosted applications</Description>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
