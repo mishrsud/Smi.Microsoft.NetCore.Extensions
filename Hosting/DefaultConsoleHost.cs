@@ -43,7 +43,7 @@ namespace Smi.NetCore.Extensions.Hosting
         
         /// <summary>
         /// Creates an <see cref="IHostBuilder"/> that is setup to run as a console application.
-        /// The <see cref="THostedService"/> is started as part of bootstrapping the application.
+        /// The THostedService is started as part of bootstrapping the application.
         /// This host is passed the following environment variables:
         ///     All environment variables starting with ASPNETCORE_
         ///     All environment variables starting with the <paramref name="environmentVariablePrefix"/>,

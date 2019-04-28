@@ -11,16 +11,36 @@ init:
 
 install:
   # Install repo specific stuff here
-before_build:
-  # Display .NET Core version
-  - cmd: dotnet --version
-  # Display minimal restore text
-  - cmd: dotnet restore --verbosity m
+  - ps: dotnet tool install --global Cake.Tool --version 0.33.0
 build_script:
-  - cmd: dotnet build
-after_build:
-  # For once the build has completed
-clone_depth: 1
-on_finish :
-  # any cleanup in here
-deploy: off
+  - ps: dotnet cake build.cake --bootstrap
+  - ps: dotnet cake build.cake --pack
+assembly_info:
+  # We'll version the binaries and the NuGet package in the build script
+  patch: false
+# We'll run the tests in the build script
+test: off
+# AppVeyor will create a release tag if a matching one does not exist
+# hence triggering another build
+skip_tags: true
+skip_commits:
+  files:
+    - .editorconfig
+    - LICENSE
+    - README.md
+    - .travis.yml
+    - .circleci/config.yml
+    - azure-pipelines.yml
+deploy:
+  - provider: NuGet
+    server: https://www.nuget.org/api/v2/package
+    api_key:
+      secure: ElOgwhtjUx4dN75tg5V0kARwPkk6P1KA5C4h7Djea6pPalHaXuxiQfVkQ/9SEvoA
+    skip_symbols: false
+    symbol_server: https://www.nuget.org/api/v2/package
+    artifact: packages
+    on:
+      branch: master
+environment:
+  # No need to pre-warm the `NuGet` cache
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
