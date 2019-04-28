@@ -37,7 +37,7 @@ Task("SemanticVersion")
     {
         var gitVersionSettings = new GitVersionSettings
         {
-            NoFetch = false,
+            NoFetch = true,
         };
 
         var gitVersion = GitVersion(gitVersionSettings);
