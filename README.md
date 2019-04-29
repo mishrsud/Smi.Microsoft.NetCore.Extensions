@@ -21,6 +21,12 @@ This project aims to provide infrastructure that lets one create a console hoste
   
 ### How to use
 1. Add a reference to Smi.NetCore.Extensions.Hosting in your dotnet core console app
+```bash
+# Package Manager console
+Install-Package Smi.NetCore.Extensions.Hosting 
+# dotnet CLI
+dotnet add package Smi.NetCore.Extensions.Hosting
+```
 2. Initialize your host like so:
 
 ```csharp
