@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Sample.TimedConsoleApp.Services;
 using Smi.NetCore.Extensions.Hosting;
 
@@ -9,16 +10,19 @@ namespace Sample.TimedConsoleApp
     public class TimedHostedService : HostedServiceBase, IDisposable
     {
         private readonly IOutputWriter _outputWriter;
+        private readonly ILogger<TimedHostedService> _logger;
         private Timer _workTimer;
         private const int RunIntervalSeconds = 5;
 
-        public TimedHostedService(IOutputWriter outputWriter)
+        public TimedHostedService(IOutputWriter outputWriter, ILogger<TimedHostedService> logger)
         {
             _outputWriter = outputWriter;
+            _logger = logger;
         }
         
         protected override Task ExecuteLongRunningProcessAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Starting");
             _workTimer = new Timer(
                 DoWork,
                 cancellationToken,
@@ -30,6 +34,7 @@ namespace Sample.TimedConsoleApp
         
         public void Dispose()
         {
+            _logger.LogWarning("Disposing");
             _outputWriter.Write($"{nameof(TimedHostedService)} is being disposed");
             _workTimer?.Change(Timeout.Infinite, 0);
             _workTimer?.Dispose();
@@ -44,6 +49,7 @@ namespace Sample.TimedConsoleApp
             }
             
             // Simulate work
+            _logger.LogInformation("Service running");
             _outputWriter.Write($"{nameof(TimedHostedService)} is working");
         }
 
