@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Smi.NetCore.Extensions.Hosting</name>
+    </assembly>
+    <members>
+        <member name="M:Smi.NetCore.Extensions.Hosting.ConsoleHostBuilderExtensions.UseStartup``1(Microsoft.Extensions.Hosting.IHostBuilder,System.String[])">
+            <summary>
+            Enables a <see cref="T:Microsoft.Extensions.Hosting.IHostBuilder"/> to use a type that implements <see cref="T:Smi.NetCore.Extensions.Hosting.IStartup"/>
+            for bootstrapping the application. 
+            </summary>
+            <param name="hostBuilder">The <see cref="T:Microsoft.Extensions.Hosting.IHostBuilder"/> that is bootstrapping the application</param>
+            <param name="commandLineArgs">Command line arguments to be passed to the application</param>
+            <typeparam name="TStartup">A type that implements <see cref="T:Smi.NetCore.Extensions.Hosting.IStartup"/></typeparam>
+            <returns>
+            An <see cref="T:Microsoft.Extensions.Hosting.IHostBuilder"/> that has been setup to call IStartup.SetupAppConfiguration
+            and IStartup.ConfigureServices
+            </returns>
+        </member>
+        <member name="M:Smi.NetCore.Extensions.Hosting.DefaultConsoleHost.CreateBuilder(System.String[],System.String,System.String)">
+            <summary>
+            Creates an <see cref="T:Microsoft.Extensions.Hosting.IHostBuilder"/> that is setup to run as a console application
+            This host is passed the following environment variables:
+                All environment variables starting with ASPNETCORE_
+                All environment variables starting with the <paramref name="environmentVariablePrefix"/>,
+                if one is passed.
+            Any command line arguments are also passed through. These can be used to override
+            environment variables. 
+            </summary>
+            <param name="args">Command line arguments to pass to the <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/></param>
+            <param name="environmentVariablePrefix">A custom prefix for the environment variables this application uses.</param>
+            <param name="applicationName">A name to uniquely identify this app.</param>
+            <returns>An <see cref="T:Microsoft.Extensions.Hosting.IHostBuilder"/> that uses console lifetime (Keeps running unless indicated to shutdown) </returns>
+        </member>
+        <member name="M:Smi.NetCore.Extensions.Hosting.DefaultConsoleHost.CreateBuilder``1(System.String[],System.String,System.String)">
+            <summary>
+            Creates an <see cref="T:Microsoft.Extensions.Hosting.IHostBuilder"/> that is setup to run as a console application.
+            The THostedService is started as part of bootstrapping the application.
+            This host is passed the following environment variables:
+                All environment variables starting with ASPNETCORE_
+                All environment variables starting with the <paramref name="environmentVariablePrefix"/>,
+                if one is passed.
+            Any command line arguments are also passed through. These can be used to override
+            environment variables. 
+            </summary>
+            <param name="args">Command line arguments to pass to the <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/></param>
+            <param name="environmentVariablePrefix">A custom prefix for the environment variables this application uses.</param>
+            <param name="applicationName">A name to uniquely identify this app.</param>
+            <typeparam name="THostedService">An <see cref="T:Microsoft.Extensions.Hosting.IHostedService"/> implementation to start</typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Smi.NetCore.Extensions.Hosting.HostedServiceBase">
+            <summary> A base class to provide correct handling of cancellation and start/stop semantics. </summary>
+            <remarks>
+            Using this gist: https://gist.github.com/davidfowl/a7dd5064d9dcf35b6eae1a7953d615e3
+            from David Fowler of the ASP.NET team
+            </remarks>
+            <inheritdoc cref="T:Microsoft.Extensions.Hosting.IHostedService"/>
+        </member>
+        <member name="M:Smi.NetCore.Extensions.Hosting.HostedServiceBase.ExecuteLongRunningProcessAsync(System.Threading.CancellationToken)">
+            <summary> The long running operation that is run as a hosted service </summary>
+            <param name="cancellationToken"> A <see cref="T:System.Threading.CancellationToken"/> to cancel the long running operaion</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents the operation </returns>
+        </member>
+    </members>
+</doc>

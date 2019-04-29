@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Smi.NetCore.Extensions.Hosting
 {
@@ -35,8 +36,17 @@ namespace Smi.NetCore.Extensions.Hosting
                 })
                 .ConfigureAppConfiguration((hostBuilderContext, configurationBuilder) =>
                 {
+                    if (!string.IsNullOrWhiteSpace(applicationName))
+                    {
+                        hostBuilderContext.HostingEnvironment.ApplicationName = applicationName;
+                    }
+                    
                     if (args == null) return;
                     configurationBuilder.AddCommandLine(args);
+                })
+                .ConfigureLogging((hostBuilderContext, loggingBuilder) =>
+                {
+                    loggingBuilder.AddConsole();
                 })
                 .UseConsoleLifetime();
         }
