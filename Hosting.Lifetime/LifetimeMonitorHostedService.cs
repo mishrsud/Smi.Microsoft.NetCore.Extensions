@@ -19,10 +19,12 @@ namespace Smi.NetCore.Extensions.Hosting.Lifetime
         public LifetimeMonitorHostedService(
             ILifetimeExpirationCheckpoint lifetimeExpirationCheckpoint,
             IHost underlyingHost,
+            ExpirationIntervalProvider expirationIntervalProvider,
             ILogger<LifetimeMonitorHostedService> logger)
         {
             _lifetimeExpirationCheckpoint = lifetimeExpirationCheckpoint;
             _underlyingHost = underlyingHost;
+            MonitorIntervalSeconds = expirationIntervalProvider.IntervalInSeconds;
             _logger = logger;
         }
         

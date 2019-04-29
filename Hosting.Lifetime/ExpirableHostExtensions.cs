@@ -23,16 +23,8 @@ namespace Smi.NetCore.Extensions.Hosting.Lifetime
             hostBuilder.ConfigureServices((hostBuilderContext, services) =>
                 {
                     services.AddSingleton<ILifetimeExpirationCheckpoint, DefaultLifetimeExpirationCheckpoint>();
-                    services.AddTransient<LifetimeMonitorHostedService>(serviceProvider =>
-                    {
-                        var checkpointService = serviceProvider.GetService<ILifetimeExpirationCheckpoint>();
-                        var host = serviceProvider.GetService<IHost>();
-                        var logger = serviceProvider.GetService<ILogger<LifetimeMonitorHostedService>>();
-                        return new LifetimeMonitorHostedService(checkpointService, host, logger)
-                        {
-                            MonitorIntervalSeconds = slidingExpirationIntervalSeconds
-                        };
-                    });
+                    services.AddSingleton(provider => new ExpirationIntervalProvider(slidingExpirationIntervalSeconds));
+                    services.AddHostedService<LifetimeMonitorHostedService>();
                 });
             return hostBuilder;
         }
