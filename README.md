@@ -20,7 +20,7 @@ This project aims to provide infrastructure that lets one create a console hoste
 - Startup.cs has the responsibility of configuring the application processing pipeline and dependency injection.  
   
 ### How to use
-1. Add a reference to Smi.NetCore.Extensions.Hosting in your dotnet core console app
+1. Add a reference to **Smi.NetCore.Extensions.Hosting** in your dotnet core console app
 ```bash
 # Package Manager console
 Install-Package Smi.NetCore.Extensions.Hosting 
