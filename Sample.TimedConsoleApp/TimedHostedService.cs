@@ -22,6 +22,7 @@ namespace Sample.TimedConsoleApp
         
         protected override Task ExecuteLongRunningProcessAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Starting");
             _workTimer = new Timer(
                 DoWork,
                 cancellationToken,
@@ -33,6 +34,7 @@ namespace Sample.TimedConsoleApp
         
         public void Dispose()
         {
+            _logger.LogWarning("Disposing");
             _outputWriter.Write($"{nameof(TimedHostedService)} is being disposed");
             _workTimer?.Change(Timeout.Infinite, 0);
             _workTimer?.Dispose();
@@ -42,12 +44,12 @@ namespace Sample.TimedConsoleApp
         {
             if (state is CancellationToken cancellationToken && cancellationToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Disposing TimedHostedService");
                 _outputWriter.Write($"{nameof(TimedHostedService)} has received Cancellation");
                 return;
             }
             
             // Simulate work
+            _logger.LogInformation("Service running");
             _outputWriter.Write($"{nameof(TimedHostedService)} is working");
         }
 

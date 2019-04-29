@@ -46,7 +46,13 @@ namespace Smi.NetCore.Extensions.Hosting
                 })
                 .ConfigureLogging((hostBuilderContext, loggingBuilder) =>
                 {
-                    loggingBuilder.AddConsole();
+                    loggingBuilder.AddConfiguration(hostBuilderContext.Configuration.GetSection("Logging"));
+                    loggingBuilder.AddConsole(options =>
+                    {
+                        options.IncludeScopes = true;
+                        options.DisableColors = false;
+                    });
+                    loggingBuilder.AddDebug();
                 })
                 .UseConsoleLifetime();
         }
