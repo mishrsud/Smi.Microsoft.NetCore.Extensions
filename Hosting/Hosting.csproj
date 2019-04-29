@@ -9,7 +9,6 @@
         <RepositoryUrl>https://github.com/mishrsud/Smi.Microsoft.NetCore.Extensions</RepositoryUrl>
         <PackageTags>Hosting Host Generic Host</PackageTags>
         <Description>Extensions on generic IHost to structure console hosted applications</Description>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
