@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Smi.NetCore.Extensions.Hosting.Lifetime
 {
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated by infrastructure")]
     public class LifetimeMonitorHostedService : HostedServiceBase, IDisposable
     {
         private readonly ILifetimeExpirationCheckpoint _lifetimeExpirationCheckpoint;
@@ -14,7 +16,7 @@ namespace Smi.NetCore.Extensions.Hosting.Lifetime
         private Timer _workTimer;
         private TimeSpan _keepAliveThresholdSeconds;
 
-        public int MonitorIntervalSeconds { get; internal set; }
+        private readonly int _monitorIntervalSeconds;
 
         public LifetimeMonitorHostedService(
             ILifetimeExpirationCheckpoint lifetimeExpirationCheckpoint,
@@ -24,13 +26,13 @@ namespace Smi.NetCore.Extensions.Hosting.Lifetime
         {
             _lifetimeExpirationCheckpoint = lifetimeExpirationCheckpoint;
             _underlyingHost = underlyingHost;
-            MonitorIntervalSeconds = expirationIntervalProvider.IntervalInSeconds;
+            _monitorIntervalSeconds = expirationIntervalProvider.IntervalInSeconds;
             _logger = logger;
         }
         
         protected override Task ExecuteLongRunningProcessAsync(CancellationToken cancellationToken)
         {
-            var keepAliveCheckInterval = GetValueOrDefault(MonitorIntervalSeconds);
+            var keepAliveCheckInterval = GetValueOrDefault(_monitorIntervalSeconds);
             _keepAliveThresholdSeconds = TimeSpan.FromSeconds(keepAliveCheckInterval);
             _logger.LogInformation("Configuring Host Lifetime monitoring to check every {CheckPeriod} seconds", keepAliveCheckInterval);
             
@@ -52,9 +54,9 @@ namespace Smi.NetCore.Extensions.Hosting.Lifetime
         private void DoKeepAliveCheck(object state)
         {
             var lastUtcCheckpoint = _lifetimeExpirationCheckpoint.GetLastUtcCheckpoint();
-            var curentUtcTime = DateTimeOffset.UtcNow;
+            var currentUtcTime = DateTimeOffset.UtcNow;
 
-            if (curentUtcTime - lastUtcCheckpoint > _keepAliveThresholdSeconds)
+            if (currentUtcTime - lastUtcCheckpoint > _keepAliveThresholdSeconds)
             {
                 _logger.LogWarning("{ServiceName} detected breach of KeepAlive threshold, Initiating stop", nameof(LifetimeMonitorHostedService));
                 _underlyingHost.StopAsync(TimeSpan.Zero).GetAwaiter().GetResult();
