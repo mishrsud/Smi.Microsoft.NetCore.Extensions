@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hosting", "Hosting\Hosting.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.TimedConsoleApp", "Sample.TimedConsoleApp\Sample.TimedConsoleApp.csproj", "{78C71CBB-693A-4B01-BDC3-C1D3322BFCD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hosting.Lifetime", "Hosting.Lifetime\Hosting.Lifetime.csproj", "{B4315F8E-A3EA-4E34-8FBE-BDFFA7E76DD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.SlidingExpirationApp", "Sample.SlidingExpirationApp\Sample.SlidingExpirationApp.csproj", "{3C46BAC2-5616-4C5F-8C0F-2D99AE6FC2C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{78C71CBB-693A-4B01-BDC3-C1D3322BFCD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78C71CBB-693A-4B01-BDC3-C1D3322BFCD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78C71CBB-693A-4B01-BDC3-C1D3322BFCD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4315F8E-A3EA-4E34-8FBE-BDFFA7E76DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4315F8E-A3EA-4E34-8FBE-BDFFA7E76DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4315F8E-A3EA-4E34-8FBE-BDFFA7E76DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4315F8E-A3EA-4E34-8FBE-BDFFA7E76DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C46BAC2-5616-4C5F-8C0F-2D99AE6FC2C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C46BAC2-5616-4C5F-8C0F-2D99AE6FC2C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C46BAC2-5616-4C5F-8C0F-2D99AE6FC2C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C46BAC2-5616-4C5F-8C0F-2D99AE6FC2C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
