@@ -48,3 +48,64 @@ public class Program
 ```
 
 Your application can now run as a daemon/service/dockerised app.
+An example app is create in the form of Sample.TimedConsoleApp.
+
+## 2. Smi.NetCore.Extensions.Hosting.Lifetime
+
+### Purpose
+Scenario:
+- Your app runs in a serverless environment where you are charged for how long the app is running. Hence, you design the app to do its job and then terminate. 
+- During busy periods, you want to avoid the cost of boostrapping the app 
+- You want your app to have some way of knowing how to keep itself up based on a threshold that is dynamically computed based on an activity
+
+### How to use
+1. Add a reference to Smi.NetCore.Extensions.Hosting.Lifetime
+
+```bash
+# Package Manager console
+Install-Package Smi.NetCore.Extensions.Hosting.Lifetime
+# dotnet CLI
+dotnet add package Smi.NetCore.Extensions.Hosting.Lifetime
+```
+
+2. Next, construct a Host like so:
+
+```csharp
+public class Program
+    {
+        public static async Task Main(string[] args)
+        {
+            // NOTE the value provided to WithSlidingExpirationInterval can come from an environment variable 
+            await DefaultConsoleHost
+                .CreateBuilder(args, "MYAPP_", nameof(SlidingExpirationApp))
+                .WithSlidingExpirationInterval(10)
+                .UseStartup<Startup>(args)
+                .RunConsoleAsync();
+        }
+    }
+```
+
+Notice the ```WithSlidingExpirationInterval(10)``` call. This call:
+1. Starts a HostedService that monitors application activity by means of the ```ILifetimeExpirationCheckpoint``` interface. This interface is registered in the IServiceCollection as a singleton.
+2. The application signals activity by calling ILifetimeExpirationCheckpoint.SetCheckpoint(). In the above example, if the application called SetCheckpoint within 10 seconds of starting up, it will continue. Otherwise, it will shutdown gracefully. The code to signal activity may look like so:
+
+```csharp
+public class MessageProcessor
+{
+    private readonly ILifetimeExpirationCheckpoint _lifetimeExpirationCheckpoint;
+
+    public MessageProcessor(ILifetimeExpirationCheckpoint lifetimeExpirationCheckpoint)
+    {
+        _lifetimeExpirationCheckpoint = lifetimeExpirationCheckpoint;
+    }
+
+    public Task ProcessMessage(Message message)
+    {
+        //do something with the message
+
+        _lifetimeExpirationCheckpoint.SetCheckpoint();   
+    }
+}
+```
+
+An example is created in the form of Sample.SlidingExpirationHost
