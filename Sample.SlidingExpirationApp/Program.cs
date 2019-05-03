@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Smi.NetCore.Extensions.Hosting;
 using Smi.NetCore.Extensions.Hosting.Lifetime;
@@ -24,8 +25,18 @@ namespace Sample.SlidingExpirationApp
             // NOTE the value provided to WithSlidingExpirationInterval can come from an environment variable 
             await DefaultConsoleHost
                 .CreateBuilder(args, "MYAPP_", nameof(SlidingExpirationApp))
-                .WithSlidingExpirationInterval(10)
+                .WithSlidingExpirationInterval(GetValueFromEnvironmentVariableOrDefault)
                 .RunConsoleAsync();
+        }
+
+        private static int GetValueFromEnvironmentVariableOrDefault()
+        {
+            if (int.TryParse(Environment.GetEnvironmentVariable("Settings__SlidingExpirationInterval"), out var settingFromEnvironmentVariable))
+            {
+                return settingFromEnvironmentVariable;
+            }
+            
+            return 30;
         }
     }
 }

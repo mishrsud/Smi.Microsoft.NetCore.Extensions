@@ -8,6 +8,7 @@
         <Authors>Sudhanshu Mishra</Authors>
         <RepositoryUrl>https://github.com/mishrsud/Smi.Microsoft.NetCore.Extensions</RepositoryUrl>
         <PackageTags>Hosting Host Generic Host</PackageTags>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Description>Extensions on generic IHost to structure console hosted applications</Description>
     </PropertyGroup>
 

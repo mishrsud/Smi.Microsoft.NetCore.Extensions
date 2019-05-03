@@ -89,6 +89,29 @@ Notice the ```WithSlidingExpirationInterval(10)``` call. This call:
 1. Starts a HostedService that monitors application activity by means of the ```ILifetimeExpirationCheckpoint``` interface. This interface is registered in the IServiceCollection as a singleton.
 2. The application signals activity by calling ILifetimeExpirationCheckpoint.SetCheckpoint(). In the above example, if the application called SetCheckpoint within 10 seconds of starting up, it will continue. Otherwise, it will shutdown gracefully. The code to signal activity may look like so:
 
+If you need to read the Interval from a configuration source (such as Environment variable / appsettings.json etc) you can use this overload of WithSlidingExpirationInterval:
+```csharp
+public class Program
+    {
+        public static async Task Main(string[] args)
+        {
+            // NOTE the value provided to WithSlidingExpirationInterval can come from an environment variable 
+            await DefaultConsoleHost
+                .CreateBuilder(args, "MYAPP_", nameof(SlidingExpirationApp))
+                .WithSlidingExpirationInterval(() => 
+                {
+                    // read value from config here
+                    int interval = ReadFromConfig()
+                    return interval;
+                })
+                .UseStartup<Startup>(args)
+                .RunConsoleAsync();
+        }
+    }
+```
+
+Example of using ILifetimeExpirationCheckpoint to signal activity 
+
 ```csharp
 public class MessageProcessor
 {

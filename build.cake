@@ -70,7 +70,7 @@ Task("Build")
                 .SetVersion(assemblyVersion)
                 .WithProperty("FileVersion", packageVersion)
                 .WithProperty("InformationalVersion", packageVersion)
-                .WithProperty("nowarn", "7035")
+                .WithProperty("nowarn", "7035;1591")
         };
 
         DotNetCoreBuild(solutionPath, settings);

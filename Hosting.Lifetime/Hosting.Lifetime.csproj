@@ -8,10 +8,15 @@
         <Authors>Sudhanshu Mishra</Authors>
         <RepositoryUrl>https://github.com/mishrsud/Smi.Microsoft.NetCore.Extensions</RepositoryUrl>
         <PackageTags>Hosting Host Expiring Host</PackageTags>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Description>
             Provides infrastructure to create a console hosted application that can be configured to stay up
             based on a specified trigger ocurring periodically.
         </Description>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">        
+        <NoWarn>1701;1702;CS1591</NoWarn>        
+        <DocumentationFile>.\Smi.NetCore.Extensions.Hosting.Lifetime.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="2.2.0" />
