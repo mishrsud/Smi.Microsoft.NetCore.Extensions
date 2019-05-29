@@ -1,7 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/bpp90v9fgwsc1nof?svg=true)](https://ci.appveyor.com/project/mishrsud/smi-microsoft-netcore-extensions)
-[Smi.NetCore.Extensions.Hosting![Nuget Version](https://buildstats.info/nuget/Smi.NetCore.Extensions.Hosting)](https://www.nuget.org/packages/Smi.NetCore.Extensions.Hosting/)
-[![Nuget Version](https://buildstats.info/nuget/Smi.NetCore.Extensions.Hosting.Lifetime)](https://www.nuget.org/packages/Smi.NetCore.Extensions.Hosting.Lifetime/)
-
+[![Nuget Version](https://buildstats.info/nuget/Smi.NetCore.Extensions.Hosting)](https://www.nuget.org/packages/Smi.NetCore.Extensions.Hosting/)
 
 # Smi.Microsoft.NetCore.Extensions
 A collection of useful extensions for .NET Core applications
@@ -53,6 +51,7 @@ Your application can now run as a daemon/service/dockerised app.
 An example app is create in the form of Sample.TimedConsoleApp.
 
 ## 2. Smi.NetCore.Extensions.Hosting.Lifetime
+[![Nuget Version](https://buildstats.info/nuget/Smi.NetCore.Extensions.Hosting.Lifetime)](https://www.nuget.org/packages/Smi.NetCore.Extensions.Hosting.Lifetime/)
 
 ### Purpose
 Scenario:
