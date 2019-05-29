@@ -1,5 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/bpp90v9fgwsc1nof?svg=true)](https://ci.appveyor.com/project/mishrsud/smi-microsoft-netcore-extensions)
-[![Nuget Version](https://buildstats.info/nuget/Smi.NetCore.Extensions.Hosting)](https://www.nuget.org/packages/Smi.NetCore.Extensions.Hosting/)
+[Smi.NetCore.Extensions.Hosting![Nuget Version](https://buildstats.info/nuget/Smi.NetCore.Extensions.Hosting)](https://www.nuget.org/packages/Smi.NetCore.Extensions.Hosting/)
 [![Nuget Version](https://buildstats.info/nuget/Smi.NetCore.Extensions.Hosting.Lifetime)](https://www.nuget.org/packages/Smi.NetCore.Extensions.Hosting.Lifetime/)
 
 
